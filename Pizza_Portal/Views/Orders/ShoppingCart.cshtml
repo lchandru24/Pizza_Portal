@@ -32,11 +32,11 @@
                         <td class="align-middle">@item.Pizza.Price.ToString("c")</td>
                         <td class="align-middle">@((item.Amount*item.Pizza.Price).ToString("c"))</td>
                         <td class="align-middle">
-                            <a class="text-danger" asp-controller="Orders" asp-action="RemoveItemFromShoppingCart" asp-route-id="@item.Pizza.Id">
+                            <a class="text-danger" name="RemoveFromCart" asp-controller="Orders" asp-action="RemoveItemFromShoppingCart" asp-route-id="@item.Pizza.Id">
                                 <i class="bi bi-cart-dash"></i>
                             </a>
 
-                            <a class="text-success" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@item.Pizza.Id">
+                            <a class="text-success" name="AddToCart"  asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@item.Pizza.Id">
                                 <i class="bi bi-cart-plus"></i>
                             </a>
                         </td>
@@ -59,10 +59,10 @@
 
         <div class="text-center">
             <div class="btn-group">
-                <a class="btn btn-outline-primary" asp-action="CompleteOrder">
+                <a class="btn btn-outline-primary" name="CompleteOrder" asp-action="CompleteOrder">
                     Complete Order
                 </a>
-                <a class="btn btn-outline-success" asp-controller="Pizza" asp-action="Index">
+                <a class="btn btn-outline-success" name="AddMoreItems" asp-controller="Pizza" asp-action="Index">
                     Add more items
                 </a>
             </div>
