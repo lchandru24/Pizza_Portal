@@ -1,9 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Pizza_Portal.Data;
+using Pizza_Portal.Data.Cart;
+using Pizza_Portal.Data.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +28,18 @@ namespace Pizza_Portal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //DbContext Configuration
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
+
+            services.AddScoped<IPizzaService, PizzaService>();
+            services.AddScoped<IOrdersService, OrdersService>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+
+            services.AddSession();
+
             services.AddControllersWithViews();
         }
 
@@ -44,6 +61,8 @@ namespace Pizza_Portal
 
             app.UseRouting();
 
+            app.UseSession();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -52,6 +71,9 @@ namespace Pizza_Portal
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //Seed Database
+            AppDbInitializer.Seed(app);
         }
     }
 }

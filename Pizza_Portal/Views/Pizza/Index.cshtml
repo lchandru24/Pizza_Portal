@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Pizza>
+
+@{
+    ViewData["Title"] = "List of Pizzas";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-xs-6 border-primary mb-3">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0" style="height: 680px;">
+                    <div class="col-md-12">
+                        <div class="card-header text-white bg-info">
+                            <p class="card-text">
+                                <h5 class="card-title">
+                                    @item.Name
+                                </h5>
+                            </p>
+                        </div>
+                    </div>    
+                    <div class="col-md-12">
+                        <center>
+                            <img src="@item.ImageURL" height="300px" width="70%" alt="@item.Name" style="top:0;" />
+                        </center>
+                        <div class="card-body">
+                            <p class="card-text"><b>Description: </b>@item.Description</p>
+                            <p class="card-text"><b>Price: </b>@item.Price.ToString("c")</p>
+                            <p class="card-text"><b>Category: </b>@item.Category</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="bottom: 0; left:0; position: absolute">
+                        
+                            <p class="card-text">
+                                <center>
+                                    <a class="btn btn-success text-white" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@item.Id"><i class="bi bi-cart-plus"></i> Add to Cart (Price @item.Price.ToString("c"))</a>
+                                </center>
+                            </p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
