@@ -15,6 +15,7 @@ namespace NUnit_Test
         private readonly IPizzaService pizzaService;
         private readonly ShoppingCart shoppingCart;
         private readonly IOrdersService ordersService;
+
         public AppDbContext context { get; set; }
         public OrdersController obj1;
         public PizzaController pizza;
@@ -24,6 +25,7 @@ namespace NUnit_Test
             obj1 = new OrdersController(pizzaService, shoppingCart, ordersService);
             pizza = new PizzaController(pizzaService, ordersService);
             cart = new ShoppingCart(context);
+           
         }
 
         [SetUp]
@@ -41,6 +43,7 @@ namespace NUnit_Test
             //Assert
             Assert.IsNotNull(result);
         }
+
 
     }
 }
