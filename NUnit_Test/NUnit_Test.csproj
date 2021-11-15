@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Pizza_Portal_V2\Pizza_Portal\Pizza_Portal.csproj" />
+    <ProjectReference Include="..\..\..\Pizza_Portal_V2\Pizza_Portal\Pizza_Portal.csproj" />
   </ItemGroup>
 
 </Project>

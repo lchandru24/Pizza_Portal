@@ -42,8 +42,43 @@ namespace NUnit_Test
 
             //Assert
             Assert.IsNotNull(result);
+            
         }
 
+        [Test]
+        public void ShoppingCart()
+        {
+            //Act
+            double res = cart.GetShoppingCartTotal();
+
+            //Assert
+            Assert.AreEqual(0, res);
+
+        }
+
+        [Test]
+        public void AddItemToShoppingCart()
+        {
+            var res1 = obj1.AddItemToShoppingCart(7);
+
+            Assert.IsNotNull(res1);
+        }
+
+        [Test]
+        public void RemoveItemToShoppingCart()
+        {
+            var res1 = obj1.RemoveItemFromShoppingCart(7);
+
+            Assert.IsNotNull(res1);
+        }
+
+        [Test]
+        public void CompleteOrder()
+        {
+            var res1 = obj1.CompleteOrder();
+
+            Assert.IsNotNull(res1);
+        }
 
     }
 }
